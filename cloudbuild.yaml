@@ -2,17 +2,16 @@ name: 'trigger-branch'
 triggers:
 - branches: ['feature/*']
 steps:
-- name: 'gcr.io/cloud-builders/go1'
-  args: ['install', '.']
-  env: ['PROJECT_ROOT=hello']
+- name: 'gcr.io/cloud-builders/go'
+  args: ['test', '-run', 'Success']
   triggers:
   - branches: ['feature/newAPI']
-  - includedFiles: ['./has/*']
+  - includedFiles: ['folder/*']
 - name: 'should be removed'
   triggers:
   - includedFiles: ['./*/test']
-- name: 'gcr.io/cloud-builders/go3'
-  args: ['build', 'hello']
+- name: 'gcr.io/cloud-builders/go'
+  args: ['test', '-run', 'Fail']
   env: ['PROJECT_ROOT=hello']
 artifacts:
   objects:
@@ -23,17 +22,16 @@ name: 'trigger-tag'
 triggers:
 - tags: ['v1\..\.1']
 steps:
-- name: 'gcr.io/cloud-builders/go1'
-  args: ['install', '.']
-  env: ['PROJECT_ROOT=hello']
+- name: 'gcr.io/cloud-builders/go'
+  args: ['test', '-run', 'Success']
 - name: 'should be removed'
   triggers:
   - ingnoredFiles: ['README.md']
-- name: 'gcr.io/cloud-builders/go3'
-  args: ['install', '.']
+- name: 'gcr.io/cloud-builders/go'
+  args: ['test', '-run', 'Fail']
   env: ['PROJECT_ROOT=hello']
   triggers:
-- tags: ['v1\..\.1']
+  - tags: ['v1\..\.1']
 artifacts:
   objects:
     location: 'gs://$PROJECT_ID/'

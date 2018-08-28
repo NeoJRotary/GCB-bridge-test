@@ -8,7 +8,7 @@ func TestSuccess(t *testing.T) {
 	}
 }
 
-func TestFailed(t *testing.T) {
+func TestFail(t *testing.T) {
 	if simple() != 2 {
 		t.Fatal("test failed")
 	}

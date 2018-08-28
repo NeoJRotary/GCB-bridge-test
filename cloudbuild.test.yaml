@@ -1,0 +1,10 @@
+steps:
+- name: 'gcr.io/cloud-builders/go'
+  args: ['test', '-run', 'Success']
+- name: 'gcr.io/cloud-builders/go'
+  args: ['test', '-run', 'Fail']
+  env: ['PROJECT_ROOT=hello']
+artifacts:
+  objects:
+    location: 'gs://$PROJECT_ID/'
+    paths: ['hello']

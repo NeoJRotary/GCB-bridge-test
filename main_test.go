@@ -9,7 +9,7 @@ func TestSuccess(t *testing.T) {
 }
 
 func TestFailed(t *testing.T) {
-	if simple() != 1 {
+	if simple() != 2 {
 		t.Fatal("test failed")
 	}
 }

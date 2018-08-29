@@ -6,7 +6,8 @@ steps:
   args: ['test', '-run', 'Success']
   triggers:
   - branches: ['feature/newAPI']
-  - includedFiles: ['./main*.go']
+    ignoredFiles: ['README.md']
+    includedFiles: ['./main*.go']
 - name: 'should be removed'
   triggers:
   - includedFiles: ['./*/test']

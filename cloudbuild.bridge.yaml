@@ -1,0 +1,41 @@
+name: 'trigger-branch'
+triggers:
+- branches: ['feature/*']
+steps:
+- name: 'gcr.io/cloud-builders/go'
+  args: ['test', '-run', 'Success']
+  triggers:
+  - branches: ['feature/newAPI']
+    ignoredFiles: ['README.md']
+    includedFiles: ['./main*.go']
+- name: 'should be removed'
+  triggers:
+  - includedFiles: ['./*/test']
+- name: 'gcr.io/cloud-builders/go'
+  args: ['test', '-run', 'Fail']
+  env: ['PROJECT_ROOT=hello']
+artifacts:
+  objects:
+    location: 'gs://$PROJECT_ID/'
+    paths: ['hello']
+---
+name: 'trigger-tag'
+triggers:
+- tags: ['v1\..\.1']
+steps:
+- name: 'gcr.io/cloud-builders/go'
+  args: ['test', '-run', 'Success']
+- name: 'should be removed'
+  triggers:
+  - ingnoredFiles: ['README.md']
+- name: 'gcr.io/cloud-builders/go'
+  args: ['test', '-run', 'Fail']
+  env: ['PROJECT_ROOT=hello']
+  triggers:
+  - tags: ['v1\..\.1']
+artifacts:
+  objects:
+    location: 'gs://$PROJECT_ID/'
+    paths: ['hello']
+---
+name: 'trigger-pullrequest'

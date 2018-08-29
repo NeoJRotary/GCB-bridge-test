@@ -5,3 +5,5 @@ steps:
 - name: 'gcr.io/cloud-builders/go'
   args: ['test', '-run', 'Fail']
   env: ['PROJECT_ROOT=tempTest']
+options:
+  substitution_option: 'ALLOW_LOOSE'

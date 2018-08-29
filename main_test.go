@@ -3,6 +3,7 @@ package main
 import "testing"
 
 func TestSuccess(t *testing.T) {
+	// add some change
 	if simple() != 1 {
 		t.Fatal("should success")
 	}

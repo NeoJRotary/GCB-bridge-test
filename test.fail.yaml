@@ -1,5 +1,7 @@
 steps:
 - name: 'gcr.io/cloud-builders/go'
   args: ['test', '-run', 'Success']
+  env: ['PROJECT_ROOT=tempTest']
 - name: 'gcr.io/cloud-builders/go'
   args: ['test', '-run', 'Fail']
+  env: ['PROJECT_ROOT=tempTest']

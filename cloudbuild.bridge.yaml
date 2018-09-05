@@ -28,6 +28,7 @@ steps:
 - name: 'should be removed'
   triggers:
   - ingnoredFiles: ['README.md']
+    includedFiles: ['*.md']
 - name: 'gcr.io/cloud-builders/go'
   args: ['test', '-run', 'Fail']
   env: ['PROJECT_ROOT=hello']

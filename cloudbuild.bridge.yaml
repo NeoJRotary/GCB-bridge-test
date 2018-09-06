@@ -40,3 +40,17 @@ artifacts:
     paths: ['hello']
 ---
 name: 'trigger-pullrequest'
+triggers:
+- pullRequestBases: ['master']
+steps:
+- name: 'gcr.io/cloud-builders/go'
+  args: ['test', '-run', 'Success']
+- name: 'gcr.io/cloud-builders/go'
+  args: ['test', '-run', 'Fail']
+  env: ['PROJECT_ROOT=hello']
+  triggers:
+  - pullRequestBases: ['master']
+artifacts:
+  objects:
+    location: 'gs://$PROJECT_ID/'
+    paths: ['hello']
